@@ -1,0 +1,94 @@
+<div class="container-fluid">
+    <h1 class="title-text">welcome to angular 8 Origin technical test: {{title}}</h1>
+    <div [ngClass]="{alert: true, 'alert-success': msg.isSuccess, 'alert-danger': !msg.isSuccess}" *ngIf="msg">
+        {{msg.content}}
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <form [formGroup]="taskData" (ngSubmit)="onClickSubmit(taskData.value)">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>ToDo Form</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="label">Label</label>
+                            <input type="text" class="form-control" id="label" name="label" placeholder="Enter label"
+                                formControlName="label">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <input type="text" class="form-control" id="description" placeholder="Enter description"
+                                name="description" formControlName="description">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">category</label>
+                            <input type="text" class="form-control" id="category" placeholder="Enter category"
+                                name="category" formControlName="category">
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="done" formControlName="done"
+                                name="done">
+                            <label class="form-check-label" for="exampleCheck1">Mark as Done</label>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary mr-5">Submit</button>
+                        <button type="reset" class="btn btn-danger">Reset</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-header row">
+                    <h2 class="col-md-6">ToDo List</h2>
+                    <div class="col-md-6"><input type="text" class="form-control" (blur)="searchData()" (keyup.enter)="searchData()" [(ngModel)]="searchContent" placeholder="Search Item..."></div>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th *ngFor="let column of columns">{{column | titlecase}}</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let task of searchtoDoList">
+                                <td *ngFor="let column of columns">
+                                    <span *ngIf="column != 'done'">
+                                        {{task[column]}}
+                                    </span>
+                                    <span *ngIf="column == 'done'">
+                                        {{task[column] ? 'Yes' : 'No'}}
+                                    </span>
+                                </td>
+                                <td>
+                                    <!-- <button class="btn btn-sm btn-success mr-5" (click)="viewData(task)">View</button> -->
+                                    <button class="btn btn-sm btn-primary mr-5" (click)="editData(task)">Edit</button>
+                                    <button class="btn btn-sm btn-danger" (click)="deleteData(task.id)">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="card mt-4" *ngIf="showViewData">
+        <div class="card-header">
+            <h2>ToDo Item</h2>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6" *ngFor="let column of columns">
+                    <span class="font-weight-bold">{{column | titlecase}}</span> : <span>{{selectedViewData[column]}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

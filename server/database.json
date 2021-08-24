@@ -1,0 +1,18 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "label": "Kitchen Cleanup",
+      "description": "Clean my dirty kitchen",
+      "category": "house",
+      "done": true
+    },
+    {
+      "id": 2,
+      "label": "House Cleaning",
+      "description": "House Cleaning need",
+      "category": "house",
+      "done": true
+    }
+  ]
+}
